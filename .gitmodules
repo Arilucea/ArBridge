@@ -1,0 +1,6 @@
+[submodule "contracts"]
+	path = contracts
+	url = https://github.com/Arilucea/Bridge-Contracts
+[submodule "relayer"]
+	path = relayer
+	url = https://github.com/Arilucea/Bridge-Relayer
