@@ -1,4 +1,3 @@
-# ArBridge
 <img src="./frontend/public/arbridge-logo.png" width="195">
 
 [![GitHub release](https://img.shields.io/github/v/release/Arilucea/ArBridge)](https://github.com/Arilucea/ArBridge/releases)

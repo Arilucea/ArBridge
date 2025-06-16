@@ -1,19 +1,30 @@
+
 import React from "react";
 import { checkRequestStatus } from "../../services/api";
+import { RequestStatusResponse } from "../../types/api";
 
-const CheckRequestForm = ({ 
-  requestId, 
-  setRequestId, 
-  isLoading, 
-  setIsLoading, 
-  setError, 
-  setResponse 
+interface CheckRequestFormProps {
+  requestId: string;
+  setRequestId: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  setResponse: React.Dispatch<React.SetStateAction<RequestStatusResponse | null>>;
+}
+
+const CheckRequestForm: React.FC<CheckRequestFormProps> = ({
+  requestId,
+  setRequestId,
+  isLoading,
+  setIsLoading,
+  setError,
+  setResponse
 }) => {
-  const handleRequestIdChange = (e) => {
+  const handleRequestIdChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setRequestId(e.target.value);
   };
 
-  const handleCheckRequest = async (e) => {
+  const handleCheckRequest = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (!requestId.trim()) {
       setError("Please enter a request ID");
@@ -25,9 +36,9 @@ const CheckRequestForm = ({
     setError(null);
 
     try {
-      const data = await checkRequestStatus(requestId);
+      const data: RequestStatusResponse = await checkRequestStatus(requestId);
       setResponse(data);
-    } catch (error) {
+    } catch (error: any) { // Catch specific error types if possible
       setError(error.message || "An error occurred while fetching the request");
     } finally {
       setIsLoading(false);
@@ -47,6 +58,7 @@ const CheckRequestForm = ({
             onChange={handleRequestIdChange}
             required
             placeholder="Enter your request ID"
+            aria-label="Request ID"
           />
         </div>
         <button

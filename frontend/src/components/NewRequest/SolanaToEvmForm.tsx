@@ -1,11 +1,20 @@
+
 import React from "react";
 import { useBridge } from "../../contexts/BridgeContext";
 import { CHAINS } from "../../utils/constants";
+import LoadingSpinner from "../shared/LoadingSpinner"; // Import LoadingSpinner
 
-const SolanaToEvmForm = () => {
-  const { solanaForm, setSolanaForm } = useBridge();
+const SolanaToEvmForm: React.FC = () => {
+  const context = useBridge();
 
-  const handleChange = (e) => {
+   // Handle context potentially being null
+   if (!context) {
+       return <LoadingSpinner />;
+   }
+
+  const { solanaForm, setSolanaForm } = context;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { name, value } = e.target;
     setSolanaForm((prevState) => ({
       ...prevState,
@@ -25,6 +34,7 @@ const SolanaToEvmForm = () => {
           onChange={handleChange}
           required
           placeholder="Enter Solana token mint address"
+          aria-label="Solana Token Mint"
         />
       </div>
 
@@ -38,6 +48,7 @@ const SolanaToEvmForm = () => {
           onChange={handleChange}
           required
           placeholder="Enter Solana token account address"
+          aria-label="Solana Token Account"
         />
       </div>
 
@@ -47,14 +58,16 @@ const SolanaToEvmForm = () => {
           id="origin_network"
           name="origin_network"
           value={solanaForm.origin_network}
-          onChange={handleChange}
+          onChange={handleChange} // Keep for consistency, though disabled
           required
-          disabled
+          disabled // Determined by bridge direction
+           aria-label="Origin Network"
         >
+           {/* Only show the relevant option */}
           <option value={CHAINS.SOLANA}>Solana</option>
         </select>
         <small className="hint-text">
-          Origin network is determined by the bridge direction
+          Origin network is determined by the bridge direction (Solana to EVM).
         </small>
       </div>
 
@@ -68,6 +81,7 @@ const SolanaToEvmForm = () => {
           onChange={handleChange}
           required
           placeholder="Enter EVM destination account address"
+          aria-label="Destination EVM Account"
         />
       </div>
     </>
