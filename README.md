@@ -58,12 +58,12 @@ git submodule update --init --recursive
 ## Flow Diagrams
 
 ### Bridge Token
-![Bridge token](./docs/flows/SuccessfulPath.jpg)
+![Bridge token](./docs/flows/SuccessfulPath.png)
 
 ### Error Recovery Flows
-- [Request Received](./docs/flows/RequestReceived.jpg)
-- [Token Received](./docs/flows/TokenReceived.jpg)
-- [Token Minted](./docs/flows/TokenMinted.jpg)
+- [Request Received](./docs/flows/RequestReceived.png)
+- [Token Received](./docs/flows/TokenReceived.png)
+- [Token Minted](./docs/flows/TokenMinted.png)
 
 ## User Interface
 
